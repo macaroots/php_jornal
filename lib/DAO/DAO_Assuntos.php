@@ -14,8 +14,8 @@ class DAO_Assuntos extends DAO_Abstrato  {
 			$conexao = null;
 			
 			return $lista;
-		} catch (Exception $e) {
-			throw new Exception('Error!: ' . $e->getMessage(), 1046, $e); 
+		} catch (PDOException $e) {
+			throw $e; 
 			return null;
 		}
 
@@ -54,7 +54,7 @@ class DAO_Assuntos extends DAO_Abstrato  {
 			$conexao = null;
 				
 		} catch (PDOException $e) {
-			print 'Error!: ' . $e->getMessage(); 
+			throw $e; 
 			return null;
 		}
 
@@ -74,7 +74,7 @@ class DAO_Assuntos extends DAO_Abstrato  {
 			
 			return $linha;
 		} catch (PDOException $e) {
-			print 'Error!: ' . $e->getMessage(); 
+			throw $e; 
 			return null;
 		}
 	}
@@ -91,7 +91,7 @@ class DAO_Assuntos extends DAO_Abstrato  {
 			$conexao = null;
 			
 		} catch (PDOException $e) {
-			print 'Error!: ' . $e->getMessage(); 
+			throw $e; 
 			return null;
 		}
 	}
