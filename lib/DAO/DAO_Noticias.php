@@ -6,7 +6,7 @@ class DAO_Noticias extends DAO_Abstrato {
 		try {
 			$conexao = $this->conecta();
 			
-			$sql = 'SELECT * FROM jor_noticias2';
+			$sql = 'SELECT * FROM jor_noticias';
 			$consulta = $conexao->prepare($sql);
 			$consulta->execute();
 			$lista = $consulta->fetchAll();
