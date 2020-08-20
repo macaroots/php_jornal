@@ -3,7 +3,10 @@ require('lib/DAO/DAO_Noticias.php');
 
 $dao = new DAO_Noticias();
 $noticiasPremium = $dao->listaPremium();
-
+$noticiasPorCategoria = array(
+	'Tecnologia' => $dao->listaPorCategoria('Tecnologia'),
+	'Esporte' => $dao->listaPorCategoria('Esporte')
+);
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,6 +39,29 @@ foreach ($noticiasPremium as $noticia) {
 }
 ?>
 		</div>
+	</div>
+	<div>
+<?php
+foreach ($noticiasPorCategoria as $categoria => $noticias) {
+?>
+		<div>
+			<h2><?php echo $categoria; ?></h2>
+			<div>
+<?php
+	foreach ($noticias as $noticia) {
+?>
+				<div>
+					<span><?php echo $noticia['titulo']; ?></span>
+					<span><?php echo $noticia['data']; ?></span>
+				</div>
+<?php
+	}
+?>
+			</div>
+		</div>
+<?php
+}
+?>
 	</div>
 </body>
 </html>
