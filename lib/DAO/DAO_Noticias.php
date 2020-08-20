@@ -6,7 +6,7 @@ class DAO_Noticias extends DAO_Abstrato {
 		try {
 			$conexao = $this->conecta();
 			
-			$sql = 'SELECT * FROM jor_noticias';
+			$sql = 'SELECT * FROM jor_noticias2';
 			$consulta = $conexao->prepare($sql);
 			$consulta->execute();
 			$lista = $consulta->fetchAll();
@@ -20,11 +20,30 @@ class DAO_Noticias extends DAO_Abstrato {
 		}
 	}
 	
-	function listaPorAssunto($idAssunto) {
+	function listaPorIdAssunto(int $idAssunto) {
 		try {
 			$conexao = $this->conecta();
 			
-			$sql = 'SELECT * FROM jor_noticias WHERE id_assunto = ?';
+			$sql = 'SELECT * FROM jor_noticias WHERE id_assunto=?';
+			$consulta = $conexao->prepare($sql);
+			$consulta->bindParam(1, $idAssunto);
+			$consulta->execute();
+			$lista = $consulta->fetchAll();
+			
+			$conexao = null;
+			
+			return $lista;
+		} catch (PDOException $e) {
+			throw $e; 
+			return null;
+		}
+	}
+	
+	function listaPorAssunto(String $idAssunto) {
+		try {
+			$conexao = $this->conecta();
+			
+			$sql = 'SELECT * FROM jor_noticias n JOIN jor_assuntos a ON n.id_assunto=a.id WHERE nome=?';
 			$consulta = $conexao->prepare($sql);
 			$consulta->bindParam(1, $idAssunto);
 			$consulta->execute();
